@@ -4,7 +4,7 @@ import java.awt.*;
 public class lobascio1 extends Platform
 {
    Color colors[] = {Color.red, Color.blue, Color.green, Color.pink, Color.orange};
-   int w, h, b = 10, level_score = 0, total_score = 0;
+   int w, h, b = 10;
    Thing balloons[], clouds[], birds[];
    Font font = new Font("Helvetica", Font.BOLD, 20);
 
@@ -20,15 +20,14 @@ public class lobascio1 extends Platform
          balloons[i].setColor(colors[(int) Math.random()*colors.length]);
       }
       for(int i = 0; i < clouds.length; i++) {
-         clouds[i] = new DiskThing( Math.random()*w, Math.random()*(w-50), 125, 75);
+         clouds[i] = new DiskThing( Math.random()*w, Math.random()*(h-50), 125, 75);
          clouds[i].setSpawnTime(15 + Math.random()*10);
          clouds[i].setClickable(false);
          clouds[i].setColor(Color.lightGray);
       }
       for(int i = 0; i < birds.length; i++) {
-         int height = Math.random()*(w-100);
-         int[] x = [-75, 0, -75], y = [height + 20, height, height - 20];
-         birds[i] = new PolygonThing( x, y );
+         double height = Math.random()*(h-100);
+         birds[i] = new PolygonThing( new double[] {-75, 0, -75}, new double[] {height + 20, height, height - 20} );
          birds[i].setSpawnTime(25 + Math.random()*10);
       }
    }
@@ -65,17 +64,10 @@ public class lobascio1 extends Platform
    public void overlay(Graphics g) {
       g.setColor(Color.black);
       g.setFont(font);
-      g.drawString("Total Score: " + total_score, 40, 50);
-      g.drawString("Level Score: " + level_score, w - 40 - stringWidth("Level Score: " + level_score, g), 50);
+      g.drawString("Total Score: " + getTotalScore(), 40, 50);
+      g.drawString("Level Score: " + getLevelScore(), w - 40 - stringWidth("Level Score: " + getLevelScore(), g), 50);
    }
 
    public void pop() { playClip("clips/pop.wav"); }
-   public void incrementScore() {
-      total_score++;
-      level_score++;
-   }
-   public void resetLevelScore() {
-      level_score = 0;
-   }
 }
 

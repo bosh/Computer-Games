@@ -12,13 +12,16 @@ import java.net.*;
 
 public class Platform extends BufferedApplet
 {
-   int w = 0, h = 0;
+   int w = 0, h = 0, levelScore = 0, totalScore = 0;
    Color bgColor = Color.white;
    Thing selectedThing = null;
+   ArrayList things = new ArrayList();
+   ArrayList uithings = new ArrayList();
 
    // GET THE iTH THING IN THIS PLATFORM
 
    public Thing thing(int i) { return ((Thing)things.get(i)); }
+   public Thing uithing(int i) { return ((Thing)uithings.get(i)); }
 
    // GET THE WIDTH AND HEIGHT OF THE DISPLAY WINDOW
 
@@ -30,11 +33,18 @@ public class Platform extends BufferedApplet
    public boolean mouseDown(Event e, int x, int y) {
       damage = true;
       selectedThing = null;
-      for (int i = things.size() - 1 ; i >= 0 ; i--)
-          if (thing(i).contains(x, y)) {
-	      selectedThing = thing(i);
-	      return thing(i).mouseDown(x, y);
-          }
+      for (int i = uithings.size() - 1 ; i >= 0 ; i--) {
+         if (uithing(i).contains(x, y)) {
+            selectedThing = uithing(i);
+            return uithing(i).mouseDown(x, y);
+         }
+      }
+      for (int i = things.size() - 1 ; i >= 0 ; i--) {
+         if (thing(i).contains(x, y)) {
+            selectedThing = thing(i);
+            return thing(i).mouseDown(x, y);
+         }
+      }
       return false;
    }
 
@@ -85,7 +95,7 @@ public class Platform extends BufferedApplet
       if (w == 0) {
          w = bounds().width;
          h = bounds().height;
-	 setup();
+	      setup();
       }
 
       update();
@@ -93,8 +103,8 @@ public class Platform extends BufferedApplet
       g.setColor(bgColor);
       g.fillRect(0, 0, w, h);
 
-      for (int i = 0 ; i < things.size() ; i++)
-         thing(i).update(g);
+      for (int i = 0 ; i < things.size() ; i++){ thing(i).update(g); }
+      for (int i = 0 ; i < uithings.size() ; i++){ uithing(i).update(g); }
 
       overlay(g);
 
@@ -113,6 +123,17 @@ public class Platform extends BufferedApplet
       }
       addThing(thing);
    }
+   
+   public void addUIThing(String className) {
+      Thing thing = null;
+      try {
+         thing = (Thing)Class.forName(className).newInstance();
+      }
+      catch (Throwable e) {
+         System.err.println("nonexisting thing class name " + className);
+      }
+      addUIThing(thing);
+   }
 
    // ADD AN ALREADY EXISTING THING TO THIS PLATFORM
 
@@ -121,7 +142,10 @@ public class Platform extends BufferedApplet
       thing.setPlatform(this);
    }
 
-   ArrayList things = new ArrayList();
+   public void addUIThing(Thing thing) {
+      uithings.add(thing);
+      thing.setPlatform(this);
+   }
 
    // HANDLE PLAYING AN AUDIO CLIP, WHETHER FROM A URL OR A LOCAL FILE
 
@@ -149,6 +173,9 @@ public class Platform extends BufferedApplet
       return g.getFontMetrics(g.getFont()).stringWidth(s);
    }
    
-//   public void incrementS
+   public void incrementScore() { totalScore++; levelScore++; }
+   public void resetLevelScore() { levelScore = 0; }
+   public int getLevelScore() { return levelScore; }
+   public int getTotalScore() { return totalScore; }
 }
 
