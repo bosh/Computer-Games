@@ -34,6 +34,7 @@ public class Platform extends BufferedApplet {
    public void resetLevelScore() { levelScore = 0; }
    public int getLevelScore() { return levelScore; }
    public int getTotalScore() { return totalScore; }
+   public void pop() { playClip("clips/pop.wav"); }
 
    // THE THREE MAIN CALLBACKS THAT CAN BE OVERRIDDEN BY THE APPLICATION
    public void setup() {}               // WHERE TO DECLARE THINGS

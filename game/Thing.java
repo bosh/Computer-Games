@@ -18,7 +18,7 @@ public class Thing {
    boolean needToUpdateShape = false;
    Platform platform;
    double dx = 0, dy = 0, spawnTime = 99;
-   boolean spawned = false, clickable = true;
+   boolean spawned = false, clickable = true, killed = false;
 
    public boolean mouseUp(int x, int y) { return false; }
    public boolean keyUp(int key) { return false; }
@@ -31,6 +31,7 @@ public class Thing {
    public double getSpawnTime() { return spawnTime; }
    public boolean isSpawned() { return spawned; }
    public boolean isClickable() { return clickable; }
+   public boolean isDead() { return killed; }
 
    public void setPlatform(Platform platform) { this.platform = platform; }
    public void setColor(Color color) { this.color = color; }
@@ -40,6 +41,7 @@ public class Thing {
    public void setSpawned(boolean val) { spawned = val; }
    public void setClickable(boolean val) { clickable = val; }
    public void setActionOnClick(String action) { actionOnClick = action; }
+   public void setKilled(boolean val) { killed = val; }
 
    public void update(Graphics g) {
       updateShape();
@@ -107,9 +109,17 @@ public class Thing {
    
    public boolean doClickAction() {
       if (actionOnClick == "explode") {
+         this.kill();
          platform.incrementScore();
          platform.removeThing(this);
+         platform.pop();
       }
       return false;
+   }
+   
+   public void kill() {
+      setX(-999);
+      setY(-999);
+      setKilled(true);
    }
 }

@@ -7,7 +7,7 @@ public class lobascio1 extends Platform {
    Thing balloons[], clouds[], birds[];
    Font font = new Font("Helvetica", Font.BOLD, 20);
    double wind = 0, dy = -5;
-   long startTime;
+   long startTime = System.currentTimeMillis();
    long lastWindUpdate = 0;
    int level;
    
@@ -22,19 +22,20 @@ public class lobascio1 extends Platform {
       birds = new Thing[13];
       for(int i = 0; i < balloons.length; i++) {
          balloons[i] = new DiskThing( 100 + Math.random()*(w-200), h, 40, 60);
-         balloons[i].setSpawnTime(1000*(Math.random()*35));
+         balloons[i].setSpawnTime(1000*(2 + Math.random()*40));
          balloons[i].setColor(colors[(int) (Math.random()*colors.length)]);
+         balloons[i].setActionOnClick("explode");
       }
       for(int i = 0; i < clouds.length; i++) {
          clouds[i] = new DiskThing( Math.random()*w, 20 + Math.random()*(h-70), 100 + Math.random()*50, 50 + Math.random()*50);
-         clouds[i].setSpawnTime(1000*(15 + Math.random()*10));
+         clouds[i].setSpawnTime(1000*(15 + Math.random()*12));
          clouds[i].setClickable(false);
          clouds[i].setColor(Color.white);
       }
       for(int i = 0; i < birds.length; i++) {
          double height = Math.random()*(h-100);
          birds[i] = new PolygonThing( new double[] {-100, -25, -100}, new double[] {height + 20, height, height - 20} );
-         birds[i].setSpawnTime(1000*(25 + Math.random()*10));
+         birds[i].setSpawnTime(1000*(30 + Math.random()*15));
       }
    }
 
@@ -87,10 +88,9 @@ public class lobascio1 extends Platform {
          if (birds[i].isSpawned())
          for(int j = 0; j < balloons.length; j++) {
             if (balloons[j].isSpawned()) {
-               if (colliding(birds[i], balloons[j])) {
+               if (colliding(birds[i], balloons[j]) && !balloons[j].isDead()) {
                   balloons[j].setSpawned(false);
-                  balloons[j].setX(-100);
-                  balloons[j].setY(-100);
+                  balloons[j].kill();
                   decrementScore();
                   pop();
                }
@@ -104,8 +104,15 @@ public class lobascio1 extends Platform {
       g.setFont(font);
       g.drawString("Total Score: " + getTotalScore(), 40, 50);
       g.drawString("Level Score: " + getLevelScore(), w - 40 - stringWidth("Level Score: " + getLevelScore(), g), 50);
+      if ((long) (System.currentTimeMillis() - startTime) < 5000) {
+         g.drawString("Pop as many balloons as you can!", (w - stringWidth("Pop as many balloons as you can!", g))/2, 300);
+         g.drawString("You have 45 seconds", (w - stringWidth("You have 45 seconds", g))/2, 400);
+      }
+      if ((long) (System.currentTimeMillis() - startTime) > 45000) {
+         g.setColor(Color.red);
+         g.drawString("GAME OVER, MAN", (w - stringWidth("GAME OVER, MAN", g))/2, 225);
+         g.setColor(Color.black);
+         g.drawString("Score: " + getTotalScore(), (w - stringWidth("Score: " + getTotalScore(), g))/2, 300);
+      }
    }
-
-   public void pop() { playClip("clips/pop.wav"); }
 }
-
