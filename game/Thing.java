@@ -18,7 +18,7 @@ public class Thing {
    boolean needToUpdateShape = false;
    Platform platform;
    double dx = 0, dy = 0, spawnTime = 99;
-   boolean spawned = true, clickable = true;
+   boolean spawned = false, clickable = true;
 
    public boolean mouseUp(int x, int y) { return false; }
    public boolean keyUp(int key) { return false; }
