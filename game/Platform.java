@@ -14,7 +14,7 @@ public class Platform extends BufferedApplet
 {
    int w = 0, h = 0, levelScore = 0, totalScore = 0;
    public Color bgColor = Color.white;
-   Thing selectedThing = null;
+   public Thing selectedThing = null;
    ArrayList things = new ArrayList();
    ArrayList uithings = new ArrayList();
 
@@ -182,6 +182,7 @@ public class Platform extends BufferedApplet
    }
    
    public void incrementScore() { totalScore++; levelScore++; }
+   public void decrementScore() { totalScore--; levelScore--; }
    public void resetLevelScore() { levelScore = 0; }
    public int getLevelScore() { return levelScore; }
    public int getTotalScore() { return totalScore; }

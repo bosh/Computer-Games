@@ -4,11 +4,42 @@ package game;
 
 import java.awt.*;
 
-public class Thing
-{
-   public void setPlatform(Platform platform) {
-      this.platform = platform;
-   }
+public class Thing {
+   public String actionOnClick = "none";
+   Color color = Color.black;
+   double X[] = new double[100];
+   double Y[] = new double[100];
+   int n = 0;
+   int IX[] = new int[100];
+   int IY[] = new int[100];
+   double x = 0, y = 0, mx = 0, my = 0;
+   double moveX = 0, moveY = 0;
+   Polygon polygon = null;
+   boolean needToUpdateShape = false;
+   Platform platform;
+   double dx = 0, dy = 0, spawnTime = 99;
+   boolean spawned = true, clickable = true;
+
+   public boolean mouseUp(int x, int y) { return false; }
+   public boolean keyUp(int key) { return false; }
+   public boolean keyDown(int key) { return false; }
+
+   public double getX() { return x; }
+   public double getY() { return y; }
+   public double getDx() { return dx; }
+   public double getDy() { return dy; }
+   public double getSpawnTime() { return spawnTime; }
+   public boolean isSpawned() { return spawned; }
+   public boolean isClickable() { return clickable; }
+
+   public void setPlatform(Platform platform) { this.platform = platform; }
+   public void setColor(Color color) { this.color = color; }
+   public void setDx(double val) { dx = val; }
+   public void setDy(double val) { dy = val; }
+   public void setSpawnTime(double val) { spawnTime = val; }
+   public void setSpawned(boolean val) { spawned = val; }
+   public void setClickable(boolean val) { clickable = val; }
+   public void setActionOnClick(String action) { actionOnClick = action; }
 
    public void update(Graphics g) {
       updateShape();
@@ -38,22 +69,6 @@ public class Thing
       }
       return false;
    }
-
-   public boolean mouseUp(int x, int y) {
-      return false;
-   }
-
-   public boolean keyUp(int key) {
-      return false;
-   }
-
-   public boolean keyDown(int key) {
-      return false;
-   }
-
-   public void setColor(Color color) { this.color = color; }
-   public double getX() { return x; }
-   public double getY() { return y; }
 
    public void setX(double x) {
       moveX += x - this.x;
@@ -90,17 +105,6 @@ public class Thing
       }
    }
    
-   public double getDx() { return dx; }
-   public double getDy() { return dy; }
-   public double getSpawnTime() { return spawnTime; }
-   public boolean isSpawned() { return spawned; }
-   public boolean isClickable() { return clickable; }
-   public void setDx(double val) { dx = val; }
-   public void setDy(double val) { dy = val; }
-   public void setSpawnTime(double val) { spawnTime = val; }
-   public void setSpawned(boolean val) { spawned = val; }
-   public void setClickable(boolean val) { clickable = val; }
-   public void setActionOnClick(String action) { actionOnClick = action; }
    public boolean doClickAction() {
       if (actionOnClick == "explode") {
          platform.incrementScore();
@@ -108,23 +112,4 @@ public class Thing
       }
       return false;
    }
-   
-
-   Color color = Color.black;
-   double X[] = new double[100];
-   double Y[] = new double[100];
-   int n = 0;
-
-   int IX[] = new int[100];
-   int IY[] = new int[100];
-   double x = 0, y = 0, mx = 0, my = 0;
-   double moveX = 0, moveY = 0;
-
-   Polygon polygon = null;
-   boolean needToUpdateShape = false;
-   Platform platform;
-   double dx = 0, dy = 0, spawnTime = 99;
-   boolean spawned = true, clickable = true;
-   public String actionOnClick = "none";
 }
-
