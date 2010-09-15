@@ -13,7 +13,7 @@ import java.net.*;
 public class Platform extends BufferedApplet
 {
    int w = 0, h = 0, levelScore = 0, totalScore = 0;
-   Color bgColor = Color.white;
+   public Color bgColor = Color.white;
    Thing selectedThing = null;
    ArrayList things = new ArrayList();
    ArrayList uithings = new ArrayList();
@@ -145,6 +145,14 @@ public class Platform extends BufferedApplet
    public void addUIThing(Thing thing) {
       uithings.add(thing);
       thing.setPlatform(this);
+   }
+
+   public void removeThing(Thing thing) {
+      things.remove(things.indexOf(thing));
+   }
+
+   public void removeUIThing(Thing thing) {
+      uithings.remove(uithings.indexOf(thing));
    }
 
    // HANDLE PLAYING AN AUDIO CLIP, WHETHER FROM A URL OR A LOCAL FILE

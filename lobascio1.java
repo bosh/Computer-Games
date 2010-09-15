@@ -9,6 +9,7 @@ public class lobascio1 extends Platform
    Font font = new Font("Helvetica", Font.BOLD, 20);
 
    public void setup() {
+      bgColor = new Color(100, 215, 240);
       w = getWidth();
       h = getHeight();
       balloons = new Thing[60];
@@ -18,24 +19,27 @@ public class lobascio1 extends Platform
          balloons[i] = new DiskThing( Math.random()*w, h, 30, 50);
          balloons[i].setSpawnTime(Math.random()*35);
          balloons[i].setColor(colors[(int) Math.random()*colors.length]);
+         addThing(balloons[i]); //TEMP
       }
       for(int i = 0; i < clouds.length; i++) {
          clouds[i] = new DiskThing( Math.random()*w, Math.random()*(h-50), 125, 75);
          clouds[i].setSpawnTime(15 + Math.random()*10);
          clouds[i].setClickable(false);
          clouds[i].setColor(Color.lightGray);
+         addUIThing(clouds[i]); //TEMP
       }
       for(int i = 0; i < birds.length; i++) {
          double height = Math.random()*(h-100);
          birds[i] = new PolygonThing( new double[] {-75, 0, -75}, new double[] {height + 20, height, height - 20} );
          birds[i].setSpawnTime(25 + Math.random()*10);
+         addThing(birds[i]); //TEMP
       }
    }
 
-   double wind = 0, dy = -3.5;
+   double wind = 0, dy = -4.5;
 
    public void update() {
-      wind = 0; //update this at random
+      wind = (wind + Math.random()*6 - 3)/2;
       for(int i = 0; i < balloons.length; i++) {
          balloons[i].setY(balloons[i].getY() + dy);
          balloons[i].setX(balloons[i].getX() + balloons[i].getDx() + wind);
@@ -65,7 +69,7 @@ public class lobascio1 extends Platform
       g.setColor(Color.black);
       g.setFont(font);
       g.drawString("Total Score: " + getTotalScore(), 40, 50);
-      g.drawString("Level Score: " + getLevelScore(), w - 40 - stringWidth("Level Score: " + getLevelScore(), g), 50);
+      g.drawString("Level Score: " + getLevelScore(), w - 40 - stringWidth("Lefvel Score: " + getLevelScore(), g), 50);
    }
 
    public void pop() { playClip("clips/pop.wav"); }

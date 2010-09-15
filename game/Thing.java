@@ -104,6 +104,7 @@ public class Thing
    public boolean doClickAction() {
       if (actionOnClick == "explode") {
          platform.incrementScore();
+         platform.removeThing(this);
       }
       return false;
    }
@@ -124,6 +125,6 @@ public class Thing
    Platform platform;
    double dx = 0, dy = 0, spawnTime = 99;
    boolean spawned = true, clickable = true;
-   String actionOnClick = "none";
+   public String actionOnClick = "none";
 }
 
