@@ -148,5 +148,7 @@ public class Platform extends BufferedApplet
    public int stringWidth(String s, Graphics g) {
       return g.getFontMetrics(g.getFont()).stringWidth(s);
    }
+   
+//   public void incrementS
 }
 

@@ -24,16 +24,18 @@ public class Thing
    }
 
    public boolean mouseDown(int x, int y) {
-      mx = x;
-      my = y;
+      if (actionOnClick != "none") { doClickAction(); }
+      if (isClickable()) { mx = x; my = y; }
       return false;
    }
 
    public boolean mouseDrag(int x, int y) {
-      setX(this.x + x - mx);
-      setY(this.y + y - my);
-      mx = x;
-      my = y;
+      if (isClickable()) {
+         setX(this.x + x - mx);
+         setY(this.y + y - my);
+         mx = x;
+         my = y;
+      }
       return false;
    }
 
@@ -49,10 +51,7 @@ public class Thing
       return false;
    }
 
-   public void setColor(Color color) {
-      this.color = color;
-   }
-
+   public void setColor(Color color) { this.color = color; }
    public double getX() { return x; }
    public double getY() { return y; }
 
@@ -85,11 +84,30 @@ public class Thing
             IX[i] = (int)X[i];
             IY[i] = (int)Y[i];
          }
-	 moveX = moveY = 0;
-	 polygon = new Polygon(IX, IY, n);
-	 needToUpdateShape = false;
+	     moveX = moveY = 0;
+	     polygon = new Polygon(IX, IY, n);
+	     needToUpdateShape = false;
       }
    }
+   
+   public double getDx() { return dx; }
+   public double getDy() { return dy; }
+   public double getSpawnTime() { return spawnTime; }
+   public boolean isSpawned() { return spawned; }
+   public boolean isClickable() { return clickable; }
+   public void setDx(double val) { dx = val; }
+   public void setDy(double val) { dy = val; }
+   public void setSpawnTime(double val) { spawnTime = val; }
+   public void setSpawned(boolean val) { spawned = val; }
+   public void setClickable(boolean val) { clickable = val; }
+   public void setActionOnClick(String action) { actionOnClick = action; }
+   public boolean doClickAction() {
+      if (actionOnClick == "explode") {
+         platform.incrementScore();
+      }
+      return false;
+   }
+   
 
    Color color = Color.black;
    double X[] = new double[100];
@@ -104,5 +122,8 @@ public class Thing
    Polygon polygon = null;
    boolean needToUpdateShape = false;
    Platform platform;
+   double dx = 0, dy = 0, spawnTime = 99;
+   boolean spawned = true, clickable = true;
+   String actionOnClick = "none";
 }
 
