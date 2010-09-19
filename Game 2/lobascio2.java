@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.*;
 import game.*;
 
-public class simpleMidiGame extends Platform
+public class lobascio2 extends Platform
 {
    int N = 8;
    Random R = new Random(0);
