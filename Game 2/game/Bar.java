@@ -16,5 +16,12 @@ public class Bar {
                   measures[i] = new Measure(64 + i*128, tlCorner, plat);
             }
       }
+
+      public void render() {
+            platform.addThing(new RectThing(64, tlCorner, width, height));
+            for(int i = 0; i < measures.length; i++) {
+                  measures[i].render();
+            }
+      }
 }
 

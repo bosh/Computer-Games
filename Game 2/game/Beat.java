@@ -1,17 +1,26 @@
 package game;
 
 public class Beat {
-      int[] notes;
       Platform platform;
-      int width = 512;
+      int width = 16;
       int height = 168;
       int cornerX, cornerY;
+      Note[] notes;
 
       public Beat(int cornerX, int cornerY, Platform plat) {
         cornerX = cornerX;
       	cornerY = cornerY;
       	platform = plat;
-      	//notes = platform.notes;
+      	notes = new Note[8];
+      	for(int i = 0; i < notes.length; i++) {
+      		notes[i] = new Note(cornerX, cornerY + 20 + i*16, i, plat);
+      	}
+      }
+      public void render() {
+            platform.addThing(new RectThing(cornerX + 4, cornerY, 8, height));
+            for(int i = 0; i < notes.length; i++) {
+                  notes[i].render();
+            }
       }
 }
 
