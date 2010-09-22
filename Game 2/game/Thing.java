@@ -4,8 +4,23 @@ package game;
 
 import java.awt.*;
 
-public class Thing
-{
+public class Thing {
+   Color color = Color.black;
+   double X[] = new double[100];
+   double Y[] = new double[100];
+   int n = 0;
+
+   int IX[] = new int[100];
+   int IY[] = new int[100];
+   double x = 0, y = 0, mx = 0, my = 0;
+   double moveX = 0, moveY = 0;
+
+   Polygon polygon = null;
+   boolean needToUpdateShape = false;
+   Platform platform;
+   
+   boolean dragOnX = false, dragOnY = false;
+
    public void setPlatform(Platform platform) {
       this.platform = platform;
    }
@@ -30,10 +45,8 @@ public class Thing
    }
 
    public boolean mouseDrag(int x, int y) {
-      setX(this.x + x - mx);
-      setY(this.y + y - my);
-      mx = x;
-      my = y;
+      if (dragOnX) { setX(this.x + x - mx); mx = x; }
+      if (dragOnY) { setY(this.y + y - my); my = y; }
       return false;
    }
 
@@ -90,19 +103,5 @@ public class Thing
 	 needToUpdateShape = false;
       }
    }
-
-   Color color = Color.black;
-   double X[] = new double[100];
-   double Y[] = new double[100];
-   int n = 0;
-
-   int IX[] = new int[100];
-   int IY[] = new int[100];
-   double x = 0, y = 0, mx = 0, my = 0;
-   double moveX = 0, moveY = 0;
-
-   Polygon polygon = null;
-   boolean needToUpdateShape = false;
-   Platform platform;
 }
 

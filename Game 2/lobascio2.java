@@ -20,7 +20,7 @@ public class lobascio2 extends Platform {
       
       // topBar.addToThings();
       // botBar.addToThings();
-      addThing(cover = new RectThing(64, 264, 576, 168)); //intentionally bad
+      addThing(cover = new RectThing(64, 264, 576, 168));
       cover.setColor(Color.black);
    }
 
