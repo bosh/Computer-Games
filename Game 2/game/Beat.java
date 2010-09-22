@@ -7,7 +7,7 @@ public class Beat {
       int height = 168;
       int cornerX, cornerY;
       Note[] notes;
-      RectThing player;
+      RectThing selector;
       int number;
 
       public Beat(int number, int cornerX, int cornerY, Platform plat) {
@@ -17,7 +17,7 @@ public class Beat {
             this.platform = plat;
             notes = new Note[8];
             for(int i = 0; i < notes.length; i++) {
-                  notes[i] = new Note(cornerX, cornerY + 20 + i*16, i, plat);
+                  notes[i] = new Note(cornerX, cornerY + 20 + i*16, 7 - i, plat);
             }
       }
 
@@ -26,9 +26,17 @@ public class Beat {
                   for(int i = 0; i < notes.length; i++) {
                   notes[i].render();
             }
-            platform.addThing(player = new RectThing(cornerX-2, cornerY+3, 18, 9));
-            player.setColor(Color.white);
-            player.dragOnY = true;
+            platform.addThing(selector = new RectThing(cornerX-2, cornerY+3, 18, 9));
+            selector.setColor(Color.white);
+            selector.dragOnY = true;
+      }
+      public int constructNote() {
+            for(int i = 0; i < notes.length; i++) {
+                  if (platform.colliding(notes[i].note, selector)) {
+                        return notes[i].value;
+                  }
+            }
+            return -1;
       }
 }
 

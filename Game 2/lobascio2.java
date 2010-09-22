@@ -12,7 +12,8 @@ public class lobascio2 extends Platform {
    Bar topBar;
    Bar botBar;
    RectThing cover, coverToggle, play1, play2;
-   boolean covered = true;
+   boolean covered = true, showScore = false;
+   int score = 0;
 
    public void setup() {
       int w = getWidth(), h = getHeight();
@@ -33,8 +34,10 @@ public class lobascio2 extends Platform {
 
       addThing(play1 = new RectThing(13, 104, 38, 24));
       play1.setColor(Color.white);
+      play1.onClick = "play1";
       addThing(play2 = new RectThing(13, 344, 38, 24));
       play2.setColor(Color.white);
+      play2.onClick = "play2";
    }
 
    public void toggleCover() {
@@ -50,8 +53,8 @@ public class lobascio2 extends Platform {
    }
 
    public void update() {
-      //      addNote(n);  //----- ADD A NOTE
-      playNotes(); //----- PLAY ALL THE NOTES FOR THIS UPDATE
+      //addNote(n);  //----- ADD A NOTE
+      //playNotes(); //----- PLAY ALL THE NOTES FOR THIS UPDATE
    }
 
    public void overlay(Graphics g) {
@@ -60,6 +63,27 @@ public class lobascio2 extends Platform {
       g.drawString("Play", 16, 124);
       g.drawString("Play", 16, 364);
       g.drawString((covered)?"Show":"Hide", 590, 364);
+      if (showScore) {
+         g.setColor(Color.white);
+         g.drawString("Score: " + score + "/16", 32, 24);
+      }
+   }
+
+   public void play(int playerNumber) {
+      int[] notes;
+      showScore = false;
+      score = 0;
+      if (playerNumber == 1) {
+         notes = topBar.constructNotes();
+         int[] notesToMatch = botBar.constructNotes();
+         playNotes(notes);
+         for(int i = 0; i < notes.length; i++) {
+            if (notes[i] == notesToMatch[i]) { score++; }
+         }
+         showScore = true;
+      } else if (playerNumber == 2) {
+         playNotes(botBar.constructNotes());
+      }
    }
 
    // ADD ONE NOTE TO THE NOTE LIST
@@ -74,22 +98,27 @@ public class lobascio2 extends Platform {
       }
    }
 
-   public void playNotes() {
-      double currentTime = System.currentTimeMillis() / 1000.0;
-      // PLAY, AND TIMESTAMP, ALL NOTES IN THE NOTE LIST
-      for (int n = 0 ; n < nNotes ; n++) {
-         int note = notes[n];
-         if (note >= 0 && note < scale.length) {
-            synth.noteOn(0, 64 + scale[note], 63);
-            noteTime[note] = currentTime;
-         }
-      }
-      // TURN OFF ALL NOTE SOUNDS THAT HAVE BEEN PLAYING TOO LONG
-      for (int note = 0 ; note < scale.length ; note++) {
-         if (noteTime[note] < currentTime - 0.5) {
-            synth.noteOff(0, 64 + scale[note],  0);
-         }
-      }
+   public void playNotes(int[] values) {
+      double currentTime = System.currentTimeMillis();
       animating = true;
+
+      for(int i = 0; i < values.length; i++) {
+         currentTime = System.currentTimeMillis();
+         if (values[i] == -1) {
+            while(System.currentTimeMillis() < currentTime + 420){};
+         } else {
+            playNote(scale[values[i]]);
+            while(System.currentTimeMillis() < currentTime + 420){};
+            offNote(scale[values[i]]);
+         }
+      }
+   }
+
+   public void playNote(int note) {
+      synth.noteOn(0, 64 + note, 63);
+   }
+   
+   public void offNote(int note) {
+      synth.noteOff(0, 64 + note,  0);
    }
 }

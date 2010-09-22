@@ -25,5 +25,13 @@ public class Measure {
                   beats[i].render();
             }
       }
+
+      public int[] constructNotes() {
+            int[] notes = new int[4];
+            for(int i = 0; i < beats.length; i++) {
+                  notes[i] = beats[i].constructNote();
+            }
+            return notes;
+      }
 }
 

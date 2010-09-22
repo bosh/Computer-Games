@@ -16,6 +16,7 @@ public class Platform extends BufferedApplet
    public Color bgColor = Color.white;
    Thing selectedThing = null;
    public void toggleCover() {} //OVERRIDE IN GAME
+   public void play(int playerNumber) {} //OVERRIDE IN GAME
    
    // GET THE iTH THING IN THIS PLATFORM
 

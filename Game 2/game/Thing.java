@@ -40,7 +40,9 @@ public class Thing {
    }
 
    public boolean mouseDown(int x, int y) {
-      if (onClick == "cover") {platform.toggleCover();}
+      if (onClick == "cover") { platform.toggleCover(); }
+      if (onClick == "play1") { platform.play(1); }
+      if (onClick == "play2") { platform.play(2); }
       mx = x;
       my = y;
       return false;

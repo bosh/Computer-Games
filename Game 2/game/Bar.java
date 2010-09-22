@@ -27,5 +27,16 @@ public class Bar {
                   measures[i].render();
             }
       }
+
+      public int[] constructNotes() {
+            int[] notes = new int[16];
+            for(int i = 0; i < measures.length; i++) {
+                  int[] measureNotes = measures[i].constructNotes();
+                  for(int j = 0; j < measureNotes.length; j++) {
+                        notes[i*4 + j] = measureNotes[j];
+                  }
+            }
+            return notes;
+      }
 }
 
