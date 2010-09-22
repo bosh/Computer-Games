@@ -8,14 +8,15 @@ public class Measure {
       int cornerX, cornerY;
 
       public Measure(int cornerX, int cornerY, Platform plat) {
-            cornerX = cornerX;
-            cornerY = cornerY;
+            this.cornerX = cornerX;
+            this.cornerY = cornerY;
       		this.platform = plat;
             beats = new Beat[4];
             for(int i = 0; i < beats.length; i++) {
                   beats[i] = new Beat(cornerX + 8 + i*32, cornerY, plat);
             }
       }
+      
       public void render() {
             platform.addThing(new RectThing(cornerX + width - 2, cornerY, 4, height));
             for(int i = 0; i < beats.length; i++) {

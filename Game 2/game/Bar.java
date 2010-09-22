@@ -1,4 +1,5 @@
 package game;
+import java.awt.*;
 
 // The Bar of measures, one per player
 public class Bar {
@@ -7,9 +8,10 @@ public class Bar {
       int width = 512;
       int height = 168;
       int tlCorner;
+      RectThing bar;
 
       public Bar(int topLeftCornerPixel, Platform plat) {
-            tlCorner = topLeftCornerPixel;
+            this.tlCorner = topLeftCornerPixel;
             this.platform = plat;
             measures = new Measure[4];
             for(int i = 0; i < measures.length; i++) {
@@ -18,7 +20,9 @@ public class Bar {
       }
 
       public void render() {
-            platform.addThing(new RectThing(64, tlCorner, width, height));
+            bar = new RectThing(64, tlCorner, width, height);
+            bar.setColor(Color.lightGray);
+            platform.addThing(bar);
             for(int i = 0; i < measures.length; i++) {
                   measures[i].render();
             }

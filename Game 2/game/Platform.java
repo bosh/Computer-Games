@@ -13,7 +13,7 @@ import java.net.*;
 public class Platform extends BufferedApplet
 {
    int w = 0, h = 0;
-   Color bgColor = Color.white;
+   public Color bgColor = Color.white;
    Thing selectedThing = null;
 
    // GET THE iTH THING IN THIS PLATFORM

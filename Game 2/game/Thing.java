@@ -19,7 +19,7 @@ public class Thing {
    boolean needToUpdateShape = false;
    Platform platform;
    
-   boolean dragOnX = true, dragOnY = true;
+   boolean dragOnX = false, dragOnY = false;
 
    public void setPlatform(Platform platform) {
       this.platform = platform;
