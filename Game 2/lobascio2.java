@@ -10,7 +10,8 @@ public class lobascio2 extends Platform {
 
    Bar topBar;
    Bar botBar;
-   RectThing cover;
+   RectThing cover, coverToggle, play1, play2;
+   boolean covered = true;
 
    public void setup() {
       int w = getWidth(), h = getHeight();
@@ -22,8 +23,29 @@ public class lobascio2 extends Platform {
       topBar.render();
       botBar.render();
 
-      addThing(cover = new RectThing(64, 264, 512, 168));
+      addThing(cover = new RectThing(64, 264, 510, 168));
       cover.setColor(Color.darkGray);
+
+      addThing(coverToggle = new RectThing(590, 345, 32, 24));
+      coverToggle.setColor(Color.darkGray);
+      coverToggle.onClick = "cover";
+
+      addThing(play1 = new RectThing(16, 104, 32, 24));
+      play1.setColor(Color.white);
+      addThing(play2 = new RectThing(16, 344, 32, 24));
+      play2.setColor(Color.white);
+   }
+
+   public void toggleCover() {
+      if (covered) {
+         removeThing(cover);
+         cover = null;
+         covered = false;
+      } else {
+         addThing(cover = new RectThing(64, 264, 510, 168));
+         cover.setColor(Color.darkGray);
+         covered = true;
+      }
    }
 
    public void update() {

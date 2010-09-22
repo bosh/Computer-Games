@@ -18,8 +18,9 @@ public class Thing {
    Polygon polygon = null;
    boolean needToUpdateShape = false;
    Platform platform;
+   public String onClick;
    
-   boolean dragOnX = false, dragOnY = false;
+   public boolean dragOnX = false, dragOnY = false;
 
    public void setPlatform(Platform platform) {
       this.platform = platform;
@@ -39,6 +40,7 @@ public class Thing {
    }
 
    public boolean mouseDown(int x, int y) {
+      if (onClick == "cover") {platform.toggleCover();}
       mx = x;
       my = y;
       return false;

@@ -1,4 +1,5 @@
 package game;
+import java.awt.*;
 
 public class Beat {
       Platform platform;
@@ -6,6 +7,7 @@ public class Beat {
       int height = 168;
       int cornerX, cornerY;
       Note[] notes;
+      RectThing player;
 
       public Beat(int cornerX, int cornerY, Platform plat) {
         this.cornerX = cornerX;
@@ -18,10 +20,13 @@ public class Beat {
       }
 
       public void render() {
-            platform.addThing(new RectThing(cornerX + 4, cornerY, 8, height));
+            platform.addThing(new RectThing(cornerX + 3, cornerY, 8, height));
             for(int i = 0; i < notes.length; i++) {
                   notes[i].render();
             }
+            platform.addThing(player = new RectThing(cornerX-2, cornerY+3, 18, 9));
+            player.setColor(Color.white);
+            player.dragOnY = true;
       }
 }
 

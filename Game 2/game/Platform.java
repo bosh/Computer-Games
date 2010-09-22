@@ -15,7 +15,8 @@ public class Platform extends BufferedApplet
    int w = 0, h = 0;
    public Color bgColor = Color.white;
    Thing selectedThing = null;
-
+   public void toggleCover() {} //OVERRIDE IN GAME
+   
    // GET THE iTH THING IN THIS PLATFORM
 
    public Thing thing(int i) { return ((Thing)things.get(i)); }
@@ -120,6 +121,8 @@ public class Platform extends BufferedApplet
       things.add(thing);
       thing.setPlatform(this);
    }
+
+   public void removeThing(Thing thing) { things.remove(things.indexOf(thing)); }
 
    ArrayList things = new ArrayList();
 
