@@ -6,14 +6,16 @@ public class Measure {
       int width = 128;
       int height = 168;
       int cornerX, cornerY;
+      int number;
 
-      public Measure(int cornerX, int cornerY, Platform plat) {
+      public Measure(int number, int cornerX, int cornerY, Platform plat) {
+            this.number = number;
             this.cornerX = cornerX;
             this.cornerY = cornerY;
-      		this.platform = plat;
+            this.platform = plat;
             beats = new Beat[4];
             for(int i = 0; i < beats.length; i++) {
-                  beats[i] = new Beat(cornerX + 8 + i*32, cornerY, plat);
+                  beats[i] = new Beat(i, cornerX + 8 + i*32, cornerY, plat);
             }
       }
       

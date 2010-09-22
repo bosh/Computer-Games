@@ -7,6 +7,7 @@ public class lobascio2 extends Platform {
    int scale[] = {0, 2, 4, 5, 7, 9, 11, 12};
    double noteTime[] = new double[scale.length];
    int nNotes = 0, notes[] = new int[100];
+   Font font = new Font("Helvetica", Font.BOLD, 16);
 
    Bar topBar;
    Bar botBar;
@@ -26,13 +27,13 @@ public class lobascio2 extends Platform {
       addThing(cover = new RectThing(64, 264, 510, 168));
       cover.setColor(Color.darkGray);
 
-      addThing(coverToggle = new RectThing(590, 345, 32, 24));
+      addThing(coverToggle = new RectThing(587, 344, 48, 24));
       coverToggle.setColor(Color.darkGray);
       coverToggle.onClick = "cover";
 
-      addThing(play1 = new RectThing(16, 104, 32, 24));
+      addThing(play1 = new RectThing(13, 104, 38, 24));
       play1.setColor(Color.white);
-      addThing(play2 = new RectThing(16, 344, 32, 24));
+      addThing(play2 = new RectThing(13, 344, 38, 24));
       play2.setColor(Color.white);
    }
 
@@ -51,6 +52,14 @@ public class lobascio2 extends Platform {
    public void update() {
       //      addNote(n);  //----- ADD A NOTE
       playNotes(); //----- PLAY ALL THE NOTES FOR THIS UPDATE
+   }
+
+   public void overlay(Graphics g) {
+      g.setColor(Color.black);
+      g.setFont(font);
+      g.drawString("Play", 16, 124);
+      g.drawString("Play", 16, 364);
+      g.drawString((covered)?"Show":"Hide", 590, 364);
    }
 
    // ADD ONE NOTE TO THE NOTE LIST

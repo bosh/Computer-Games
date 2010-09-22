@@ -15,7 +15,7 @@ public class Bar {
             this.platform = plat;
             measures = new Measure[4];
             for(int i = 0; i < measures.length; i++) {
-                  measures[i] = new Measure(64 + i*128, tlCorner, plat);
+                  measures[i] = new Measure(i, 64 + i*128, tlCorner, plat);
             }
       }
 
