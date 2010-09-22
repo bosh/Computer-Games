@@ -1,4 +1,4 @@
-package game;
+package game2;
 
 // GENERIC PLATFORM, WITH SUPPORT FOR DISPLAY, PICKING AND AUDIO.
 

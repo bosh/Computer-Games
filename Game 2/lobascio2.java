@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.util.*;
-import game.*;
+import game2.*;
 
 public class lobascio2 extends Platform {
    MidiSynth synth = new MidiSynth();

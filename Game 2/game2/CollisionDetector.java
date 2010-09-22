@@ -1,4 +1,4 @@
-package game;
+package game2;
 
 // DETECT COLLISIONS BETWEEN TWO CONVEX POLYGONS
 

@@ -1,4 +1,4 @@
-package game;
+package game2;
 
 // A THING SHAPED LIKE A DISK
 

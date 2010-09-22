@@ -1,4 +1,4 @@
-package game;
+package game2;
 import java.awt.*;
 
 // The Bar of measures, one per player
