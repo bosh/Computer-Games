@@ -3,7 +3,7 @@
    Load text from a URL, local file or input stream.
 */
 
-package game2;
+package game3;
 
 import java.io.*;
 import java.net.*;

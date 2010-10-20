@@ -1,4 +1,4 @@
-package game2;
+package game3;
 // GENERIC PLATFORM, WITH SUPPORT FOR DISPLAY, PICKING AND AUDIO.
 import java.awt.*;
 import java.text.*;

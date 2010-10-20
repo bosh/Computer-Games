@@ -1,8 +1,8 @@
 import java.awt.*;
 import java.util.*;
-import game2.*;
+import game3.*;
 
-public class lobascio2log extends Platform {
+public class lobascio3 extends Platform {
    MidiSynth synth = new MidiSynth();
    int scale[] = {0, 2, 4, 5, 7, 9, 11, 12};
    double noteTime[] = new double[scale.length];

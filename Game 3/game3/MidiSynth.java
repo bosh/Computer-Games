@@ -1,4 +1,4 @@
-package game2;
+package game3;
 
 import java.util.*;
 
