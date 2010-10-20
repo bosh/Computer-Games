@@ -16,6 +16,7 @@ public class lobascio3 extends Platform {
    int score = 0;
 
    public void setup() {
+      setProjectName("Lobascio 2 with Logging");
       int w = getWidth(), h = getHeight();
       bgColor = Color.black;
       
@@ -42,10 +43,12 @@ public class lobascio3 extends Platform {
 
    public void toggleCover() {
       if (covered) {
+         output("Removing cover.\n");
          removeThing(cover);
          cover = null;
          covered = false;
       } else {
+         output("Restoring cover.\n");
          addThing(cover = new RectThing(64, 264, 510, 168));
          cover.setColor(Color.darkGray);
          covered = true;
@@ -70,6 +73,7 @@ public class lobascio3 extends Platform {
    }
 
    public void play(int playerNumber) {
+      output("Playing section number " + playerNumber + "\n");
       int[] notes;
       showScore = false;
       score = 0;
@@ -81,6 +85,7 @@ public class lobascio3 extends Platform {
             if (notes[i] == notesToMatch[i]) { score++; }
          }
          showScore = true;
+         output("Score is " + score + "\n");
       } else if (playerNumber == 2) {
          playNotes(botBar.constructNotes());
       }

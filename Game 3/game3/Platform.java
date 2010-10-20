@@ -46,7 +46,7 @@ public class Platform extends BufferedApplet {
       logFileName = name;
    }
 
-   void output(String s) {
+   public void output(String s) {
       if (textIO == null) {
          textIO = new TextIO();
          textIO.openOutput(logFileName + ".txt");

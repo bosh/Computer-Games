@@ -29,6 +29,7 @@ public class Beat {
             platform.addThing(selector = new RectThing(cornerX-2, cornerY+3, 18, 9));
             selector.setColor(Color.white);
             selector.dragOnY = true;
+            platform.setCollisionTracked(selector);
       }
       public int constructNote() {
             for(int i = 0; i < notes.length; i++) {

@@ -1,0 +1,6 @@
+Lobascio 2 with Logging report version 0.0 lobascio3 2010/10/20 16:33:08
+Removing cover.Restoring cover.Playing section number 1Score is 131933 VERBOSITY 1
+1942 UP_ON 332
+1963 VERBOSITY 2
+1975 UP_ON 332
+Playing section number 1Score is 132772 DOWN_ON 332 UP_ON 332

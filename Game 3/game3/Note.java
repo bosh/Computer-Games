@@ -21,6 +21,7 @@ public class Note {
             note = new RectThing(cornerX, cornerY, width-2, height);
             note.setColor(colors[value]);
             platform.addThing(note);
+            platform.setCollisionTracked(note);
       }
 }
 
